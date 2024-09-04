@@ -1,0 +1,10 @@
+%%sql
+-- Select only the first_name column
+-- Filter for results where sex is 'F', year is greater than 2015, and first_name ends in 'a'
+-- Group by first_name and order by the total number of babies given that first_name
+SELECT first_name
+FROM baby_names
+WHERE sex = 'F' AND year > 2015
+    AND first_name LIKE '%a'
+GROUP BY first_name
+ORDER BY SUM(num) DESC;
