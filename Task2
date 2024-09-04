@@ -1,0 +1,14 @@
+%%sql
+
+-- Classify first names as 'Classic', 'Semi-classic', 'Semi-trendy', or 'Trendy'
+-- Alias this column as popularity_type
+-- Select first_name, the sum of babies who have ever had that name, and popularity_type
+-- Order the results alphabetically by first_name
+SELECT first_name, SUM(num),
+    CASE WHEN COUNT(year) > 80 THEN 'Classic'
+        WHEN COUNT(year) > 50 THEN 'Semi-classic'
+        WHEN COUNT(year) > 20 THEN 'Semi-trendy'
+        ELSE 'Trendy' END AS popularity_type
+FROM baby_names
+GROUP BY first_name
+ORDER BY first_name;
