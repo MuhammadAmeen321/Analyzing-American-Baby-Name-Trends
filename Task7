@@ -1,0 +1,15 @@
+%%sql
+
+-- Select year, first_name given to the largest number of male babies, and num of babies given that name
+-- Join baby_names to the code in the last task as a subquery
+-- Order results by year descending
+SELECT b.year, b.first_name, b.num
+FROM baby_names AS b
+INNER JOIN (
+    SELECT year, MAX(num) as max_num
+    FROM baby_names
+    WHERE sex = 'M'
+    GROUP BY year) AS subquery 
+ON subquery.year = b.year 
+    AND subquery.max_num = b.num
+ORDER BY year DESC;
