@@ -1,0 +1,13 @@
+%%sql
+
+-- RANK names by the sum of babies who have ever had that name (descending), aliasing as name_rank
+-- Select name_rank, first_name, and the sum of babies who have ever had that name
+-- Filter the data for results where sex equals 'F'
+-- Limit to ten results
+SELECT
+    RANK() OVER(ORDER BY SUM(num) DESC) AS name_rank,
+    first_name, SUM(num)
+FROM baby_names
+WHERE sex = 'F'
+GROUP BY first_name
+LIMIT 10;
