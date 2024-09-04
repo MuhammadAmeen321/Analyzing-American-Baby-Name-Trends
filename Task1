@@ -1,0 +1,11 @@
+%%sql
+postgresql:///names
+    
+-- Select first names and the total babies with that first_name
+-- Group by first_name and filter for those names that appear in all 101 years
+-- Order by the total number of babies with that first_name, descending
+SELECT first_name, SUM(num)
+FROM baby_names
+GROUP BY first_name
+HAVING COUNT(year) = 101
+ORDER BY SUM(num) DESC;
