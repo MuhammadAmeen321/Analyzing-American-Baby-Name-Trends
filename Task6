@@ -1,0 +1,8 @@
+%%sql
+
+-- Select year and maximum number of babies given any one male name in that year, aliased as max_num
+-- Filter the data to include only results where sex equals 'M'
+SELECT year, MAX(num) AS max_num
+FROM baby_names
+WHERE sex = 'M'
+GROUP BY year;
