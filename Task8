@@ -1,0 +1,21 @@
+%%sql
+
+-- Select first_name and a count of years it was the top name in the last task; alias as count_top_name
+-- Use the code from the previous task as a common table expression
+-- Group by first_name and order by count_top_name descending
+WITH top_male_names AS (
+    SELECT b.year, b.first_name, b.num
+    FROM baby_names AS b
+    INNER JOIN (
+        SELECT year, MAX(num) num
+        FROM baby_names
+        WHERE sex = 'M'
+        GROUP BY year) AS subquery 
+    ON subquery.year = b.year 
+        AND subquery.num = b.num
+    ORDER BY YEAR DESC
+    )
+SELECT first_name, COUNT(first_name) as count_top_name
+FROM top_male_names
+GROUP BY first_name
+ORDER BY COUNT(first_name) DESC;
