@@ -1,0 +1,11 @@
+%%sql
+
+-- Select year, first_name, num of Olivias in that year, and cumulative_olivias
+-- Sum the cumulative babies who have been named Olivia up to that year; alias as cumulative_olivias
+-- Filter so that only data for the name Olivia is returned.
+-- Order by year from the earliest year to most recent
+SELECT year, first_name, num,
+    SUM(num) OVER (ORDER BY year) AS cumulative_olivias
+FROM baby_names
+WHERE first_name = 'Olivia'
+ORDER BY year;
